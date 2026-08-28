@@ -28,7 +28,7 @@ interface BerandaPageProps {
   currentUser: User;
   onOpenAuth: () => void;
   completedPages?: PageId[];
-  onOpenGoogleChat?: () => void;
+  onOpenForumChat?: () => void;
   onOpenAiAssistant?: () => void;
   onOpenArExploration?: () => void;
 }
@@ -38,7 +38,7 @@ export const BerandaPage: React.FC<BerandaPageProps> = ({
   currentUser,
   onOpenAuth,
   completedPages = ['beranda' as PageId],
-  onOpenGoogleChat,
+  onOpenForumChat,
   onOpenAiAssistant,
   onOpenArExploration,
 }) => {

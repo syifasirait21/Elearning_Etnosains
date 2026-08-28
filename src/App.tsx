@@ -5,7 +5,7 @@ import { isPageUnlocked, getLockedReason, getLatestUnlockedPage } from './lib/pr
 import { Header } from './components/Header';
 import { SidebarStepper } from './components/SidebarStepper';
 import { AuthModal } from './components/AuthModal';
-import { GoogleChatModal } from './components/GoogleChatModal';
+import { ForumDiskusiModal } from './components/ForumDiskusiModal';
 import { AiAssistantModal } from './components/AiAssistantModal';
 import { ArExplorationModal } from './components/ArExplorationModal';
 import { LEARNING_PAGES } from './data/learningData';
@@ -39,7 +39,7 @@ export function App() {
   const [currentPage, setCurrentPage] = useState<PageId>('beranda');
   const [completedPages, setCompletedPages] = useState<PageId[]>([]);
   const [isAuthOpen, setIsAuthOpen] = useState<boolean>(false);
-  const [isGoogleChatOpen, setIsGoogleChatOpen] = useState<boolean>(false);
+  const [isForumChatOpen, setIsForumChatOpen] = useState<boolean>(false);
   const [isAiAssistantOpen, setIsAiAssistantOpen] = useState<boolean>(false);
   const [isArExplorationOpen, setIsArExplorationOpen] = useState<boolean>(false);
   const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(false);
@@ -165,7 +165,7 @@ export function App() {
         onToggleWideMode={() => setIsWideMode(!isWideMode)}
         fontSize={fontSize}
         onChangeFontSize={setFontSize}
-        onOpenGoogleChat={() => setIsGoogleChatOpen(true)}
+        onOpenForumChat={() => setIsForumChatOpen(true)}
         onOpenAiAssistant={() => setIsAiAssistantOpen(true)}
         onOpenArExploration={() => setIsArExplorationOpen(true)}
       />
@@ -184,7 +184,7 @@ export function App() {
               isInline={true}
               onOpenAiAssistant={() => setIsAiAssistantOpen(true)}
               onOpenArExploration={() => setIsArExplorationOpen(true)}
-              onOpenGoogleChat={() => setIsGoogleChatOpen(true)}
+              onOpenForumChat={() => setIsForumChatOpen(true)}
               onLockedAttempt={handleLockedAttempt}
             />
           </aside>
@@ -198,7 +198,7 @@ export function App() {
               currentUser={currentUser}
               completedPages={completedPages}
               onOpenAuth={() => setIsAuthOpen(true)}
-              onOpenGoogleChat={() => setIsGoogleChatOpen(true)}
+              onOpenForumChat={() => setIsForumChatOpen(true)}
               onOpenAiAssistant={() => setIsAiAssistantOpen(true)}
               onOpenArExploration={() => setIsArExplorationOpen(true)}
             />
@@ -320,7 +320,7 @@ export function App() {
         currentUser={currentUser}
         onOpenAiAssistant={() => setIsAiAssistantOpen(true)}
         onOpenArExploration={() => setIsArExplorationOpen(true)}
-        onOpenGoogleChat={() => setIsGoogleChatOpen(true)}
+        onOpenForumChat={() => setIsForumChatOpen(true)}
         onLockedAttempt={handleLockedAttempt}
       />
 
@@ -384,18 +384,18 @@ export function App() {
         </div>
       </footer>
 
-      {/* Auth / Role Switcher Modal */}
+      {/* Auth / Role Switcher Modal (Simple Local Login: Siswa: nama, kelas, pass; Guru: email/user, pass) */}
       <AuthModal
         isOpen={isAuthOpen}
         onClose={() => setIsAuthOpen(false)}
         currentUser={currentUser}
-        onSwitchUser={handleSwitchUser}
+        onUserChanged={handleSwitchUser}
       />
 
-      {/* Google Chat Discussion Forum Modal */}
-      <GoogleChatModal
-        isOpen={isGoogleChatOpen}
-        onClose={() => setIsGoogleChatOpen(false)}
+      {/* Classroom Discussion Forum Modal (Local Collaborative Discussions) */}
+      <ForumDiskusiModal
+        isOpen={isForumChatOpen}
+        onClose={() => setIsForumChatOpen(false)}
         currentUser={currentUser}
         currentPage={currentPage}
       />

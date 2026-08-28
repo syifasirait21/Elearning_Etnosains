@@ -36,7 +36,7 @@ interface HeaderProps {
   onToggleWideMode: () => void;
   fontSize: 'normal' | 'large' | 'xlarge';
   onChangeFontSize: (size: 'normal' | 'large' | 'xlarge') => void;
-  onOpenGoogleChat?: () => void;
+  onOpenForumChat?: () => void;
   onOpenAiAssistant?: () => void;
   onOpenArExploration?: () => void;
 }
@@ -55,7 +55,7 @@ export const Header: React.FC<HeaderProps> = ({
   onToggleWideMode,
   fontSize,
   onChangeFontSize,
-  onOpenGoogleChat,
+  onOpenForumChat,
   onOpenAiAssistant,
   onOpenArExploration,
 }) => {
@@ -157,10 +157,10 @@ export const Header: React.FC<HeaderProps> = ({
           )}
 
           {/* Dedicated 💬 Forum Diskusi Button */}
-          {onOpenGoogleChat && (
+          {onOpenForumChat && (
             <button
               id="btn-header-open-chat"
-              onClick={onOpenGoogleChat}
+              onClick={onOpenForumChat}
               className="hidden sm:flex px-2.5 sm:px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 border border-slate-200 text-slate-700 text-xs font-bold items-center gap-1.5 transition-all shrink-0"
               title="Buka Forum Diskusi Kelas"
             >

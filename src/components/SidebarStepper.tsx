@@ -38,7 +38,7 @@ interface SidebarStepperProps {
   isInline?: boolean;
   onOpenAiAssistant?: () => void;
   onOpenArExploration?: () => void;
-  onOpenGoogleChat?: () => void;
+  onOpenForumChat?: () => void;
   onLockedAttempt?: (pageId: PageId, reason: string) => void;
 }
 
