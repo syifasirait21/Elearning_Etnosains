@@ -1,0 +1,6 @@
+{
+  "name": "E-Learning Biologi Etnosains Rumah Melayu Langkat",
+  "description": "Media E-Learning Biologi bermuatan Etnosains Rumah Melayu Langkat pada materi Perubahan Lingkungan untuk meningkatkan Literasi Lingkungan peserta didik SMA.",
+  "requestFramePermissions": ["camera"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
