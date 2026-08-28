@@ -11,13 +11,6 @@ import {
   ShieldCheck,
   ChevronRight,
   Sparkles,
-  Maximize2,
-  Minimize2,
-  PanelLeftClose,
-  PanelLeft,
-  ZoomIn,
-  ZoomOut,
-  Type,
   Bot,
   MessageSquare
 } from 'lucide-react';
@@ -65,12 +58,6 @@ export const Header: React.FC<HeaderProps> = ({
   // Calculate progress % based on the 12 core learning stages (starting from petunjuk)
   const coreLearned = completedPages.filter(p => p !== 'beranda' && p !== 'dashboard-siswa' && p !== 'dashboard-guru').length;
   const progressPercent = Math.min(100, Math.round((coreLearned / 12) * 100));
-
-  const toggleFontSize = () => {
-    if (fontSize === 'normal') onChangeFontSize('large');
-    else if (fontSize === 'large') onChangeFontSize('xlarge');
-    else onChangeFontSize('normal');
-  };
 
   return (
     <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-emerald-100 shadow-xs">
@@ -168,65 +155,6 @@ export const Header: React.FC<HeaderProps> = ({
               <span className="hidden md:inline text-[11px]">Forum Diskusi</span>
             </button>
           )}
-
-          {/* Full-width / Focus Mode Toggle Button */}
-          <button
-            id="btn-toggle-wide-mode"
-            onClick={onToggleWideMode}
-            className={`hidden lg:flex px-2.5 py-1.5 rounded-xl border text-xs font-semibold items-center gap-1.5 transition-all ${
-              isWideMode 
-                ? 'bg-emerald-700 text-white border-emerald-800 shadow-xs' 
-                : 'bg-slate-50 hover:bg-slate-100 text-slate-700 border-slate-200'
-            }`}
-            title={isWideMode ? "Tampilan Standar" : "Tampilan Lebar Penuh (Fokus Membaca)"}
-          >
-            {isWideMode ? (
-              <>
-                <PanelLeft className="w-3.5 h-3.5 text-amber-300" />
-                <span className="text-[11px]">Standar</span>
-              </>
-            ) : (
-              <>
-                <PanelLeftClose className="w-3.5 h-3.5 text-emerald-700" />
-                <span className="text-[11px]">Lebar Penuh</span>
-              </>
-            )}
-          </button>
-
-          {/* Fullscreen Toggle Button */}
-          <button
-            id="btn-toggle-fullscreen"
-            onClick={onToggleFullscreen}
-            className={`p-2 sm:px-2.5 sm:py-1.5 rounded-xl border text-xs font-semibold flex items-center gap-1.5 transition-all ${
-              isFullscreen 
-                ? 'bg-amber-500 text-emerald-950 border-amber-600 shadow-xs font-bold' 
-                : 'bg-slate-50 hover:bg-slate-100 text-slate-700 border-slate-200'
-            }`}
-            title={isFullscreen ? "Keluar Layar Penuh (ESC)" : "Mode Layar Penuh (Fullscreen)"}
-          >
-            {isFullscreen ? (
-              <>
-                <Minimize2 className="w-3.5 h-3.5" />
-                <span className="hidden xl:inline text-[11px]">Keluar Fullscreen</span>
-              </>
-            ) : (
-              <>
-                <Maximize2 className="w-3.5 h-3.5 text-slate-600" />
-                <span className="hidden xl:inline text-[11px]">Layar Penuh</span>
-              </>
-            )}
-          </button>
-
-          {/* Font Size Zoom Switcher */}
-          <button
-            id="btn-toggle-font-size"
-            onClick={toggleFontSize}
-            className="px-2 sm:px-2.5 py-1.5 rounded-xl bg-slate-50 hover:bg-slate-100 border border-slate-200 text-slate-700 text-xs font-bold flex items-center gap-1 transition-colors"
-            title={`Ukuran Teks: ${fontSize === 'normal' ? 'Standar' : fontSize === 'large' ? 'Besar' : 'Sangat Besar'}. Klik untuk mengubah.`}
-          >
-            <Type className="w-3.5 h-3.5 text-emerald-700" />
-            <span className="text-[11px]">{fontSize === 'normal' ? '100%' : fontSize === 'large' ? '115%' : '130%'}</span>
-          </button>
 
           {/* Role Dashboard Button */}
           {currentUser.role === 'guru' ? (
