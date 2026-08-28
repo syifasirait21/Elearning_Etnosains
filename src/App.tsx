@@ -80,10 +80,19 @@ export function App() {
     }
   };
 
-  // When navigating, validate sequential access and record completion
+  // When navigating or pressing Lanjut, mark the current stage completed and validate sequential access
   const handleNavigate = (page: PageId) => {
-    // Check if target page is unlocked for current student
-    const unlocked = isPageUnlocked(page, completedPages, currentUser);
+    let updatedCompleted = completedPages;
+
+    // If the student is on an active learning stage, mark it as completed immediately
+    if (currentUser.role === 'siswa' && currentPage !== 'dashboard-siswa' && currentPage !== 'dashboard-guru') {
+      const updated = markPageCompleted(currentUser.id, currentPage);
+      updatedCompleted = updated.completedPages;
+      setCompletedPages(updatedCompleted);
+    }
+
+    // Check if target page is unlocked for current student with the updated completion state
+    const unlocked = isPageUnlocked(page, updatedCompleted, currentUser);
     if (!unlocked) {
       const reason = getLockedReason(page);
       const targetPageItem = LEARNING_PAGES.find(p => p.id === page);
@@ -95,12 +104,6 @@ export function App() {
         setLockedToast((prev) => (prev?.message === reason ? null : prev));
       }, 4500);
       return;
-    }
-
-    // Auto mark completion for student tracking on current page when advancing
-    if (currentUser.role === 'siswa') {
-      const updated = markPageCompleted(currentUser.id, currentPage);
-      setCompletedPages(updated.completedPages);
     }
 
     setCurrentPage(page);

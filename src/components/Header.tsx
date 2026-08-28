@@ -17,7 +17,9 @@ import {
   PanelLeft,
   ZoomIn,
   ZoomOut,
-  Type
+  Type,
+  Bot,
+  MessageSquare
 } from 'lucide-react';
 
 interface HeaderProps {
@@ -99,8 +101,18 @@ export const Header: React.FC<HeaderProps> = ({
 
       {/* Main Nav */}
       <div className="w-full mx-auto px-3 sm:px-6 lg:px-10 xl:px-12 h-16 flex items-center justify-between gap-3 sm:gap-4">
-        {/* Left: Brand */}
+        {/* Left: Brand & Mobile Sidebar Toggle */}
         <div className="flex items-center gap-2 sm:gap-3">
+          <button
+            id="btn-toggle-sidebar-header"
+            onClick={onToggleSidebar}
+            className="p-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 transition-colors xl:hidden shrink-0 flex items-center justify-center"
+            title="Buka Daftar Modul"
+            aria-label="Buka Daftar Modul"
+          >
+            <Menu className="w-5 h-5 text-emerald-800" />
+          </button>
+
           <div 
             onClick={() => onNavigate('beranda')}
             className="cursor-pointer flex items-center gap-2.5 group"
@@ -129,13 +141,39 @@ export const Header: React.FC<HeaderProps> = ({
           <span className="text-slate-500 text-[11px] shrink-0">{currentMeta.category}</span>
         </div>
 
-        {/* Right: Fullscreen, Reading Mode, Font Zoom & Profile Controls */}
-        <div className="flex items-center gap-1.5 sm:gap-2.5">
+        {/* Right: Asisten AI, Forum Chat, Fullscreen, Font Zoom & Profile Controls */}
+        <div className="flex items-center gap-1.5 sm:gap-2">
+          {/* Dedicated 🤖 Tanya Asisten AI Button */}
+          {onOpenAiAssistant && (
+            <button
+              id="btn-header-open-ai"
+              onClick={onOpenAiAssistant}
+              className="px-2.5 sm:px-3 py-1.5 rounded-xl bg-gradient-to-r from-emerald-700 to-teal-800 hover:from-emerald-800 hover:to-teal-900 text-white text-xs font-bold flex items-center gap-1.5 shadow-sm transition-all hover:scale-105 active:scale-95 shrink-0"
+              title="Buka 🤖 Asisten Belajar AI (Tutor Biologi Etnosains)"
+            >
+              <Bot className="w-4 h-4 text-amber-300" />
+              <span className="text-[11px] sm:text-xs">Tanya AI</span>
+            </button>
+          )}
+
+          {/* Dedicated 💬 Forum Diskusi Button */}
+          {onOpenGoogleChat && (
+            <button
+              id="btn-header-open-chat"
+              onClick={onOpenGoogleChat}
+              className="hidden sm:flex px-2.5 sm:px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 border border-slate-200 text-slate-700 text-xs font-bold items-center gap-1.5 transition-all shrink-0"
+              title="Buka Forum Diskusi Kelas"
+            >
+              <MessageSquare className="w-4 h-4 text-emerald-700" />
+              <span className="hidden md:inline text-[11px]">Forum Diskusi</span>
+            </button>
+          )}
+
           {/* Full-width / Focus Mode Toggle Button */}
           <button
             id="btn-toggle-wide-mode"
             onClick={onToggleWideMode}
-            className={`px-2.5 py-1.5 rounded-xl border text-xs font-semibold flex items-center gap-1.5 transition-all ${
+            className={`hidden lg:flex px-2.5 py-1.5 rounded-xl border text-xs font-semibold items-center gap-1.5 transition-all ${
               isWideMode 
                 ? 'bg-emerald-700 text-white border-emerald-800 shadow-xs' 
                 : 'bg-slate-50 hover:bg-slate-100 text-slate-700 border-slate-200'
@@ -145,12 +183,12 @@ export const Header: React.FC<HeaderProps> = ({
             {isWideMode ? (
               <>
                 <PanelLeft className="w-3.5 h-3.5 text-amber-300" />
-                <span className="hidden lg:inline text-[11px]">Tampilan Standar</span>
+                <span className="text-[11px]">Standar</span>
               </>
             ) : (
               <>
                 <PanelLeftClose className="w-3.5 h-3.5 text-emerald-700" />
-                <span className="hidden lg:inline text-[11px]">Lebar Penuh</span>
+                <span className="text-[11px]">Lebar Penuh</span>
               </>
             )}
           </button>
@@ -195,7 +233,7 @@ export const Header: React.FC<HeaderProps> = ({
             <button
               id="btn-nav-guru-dashboard"
               onClick={() => onNavigate('dashboard-guru')}
-              className={`px-3 py-1.5 rounded-xl text-xs font-bold flex items-center gap-1.5 transition-all ${
+              className={`px-2.5 sm:px-3 py-1.5 rounded-xl text-xs font-bold flex items-center gap-1.5 transition-all ${
                 currentPage === 'dashboard-guru'
                   ? 'bg-amber-600 text-white shadow-xs'
                   : 'bg-amber-50 text-amber-900 border border-amber-200 hover:bg-amber-100'
@@ -208,7 +246,7 @@ export const Header: React.FC<HeaderProps> = ({
             <button
               id="btn-nav-siswa-dashboard"
               onClick={() => onNavigate('dashboard-siswa')}
-              className={`px-3 py-1.5 rounded-xl text-xs font-bold flex items-center gap-1.5 transition-all ${
+              className={`px-2.5 sm:px-3 py-1.5 rounded-xl text-xs font-bold flex items-center gap-1.5 transition-all ${
                 currentPage === 'dashboard-siswa'
                   ? 'bg-emerald-700 text-white shadow-xs'
                   : 'bg-emerald-50 text-emerald-900 border border-emerald-200 hover:bg-emerald-100'

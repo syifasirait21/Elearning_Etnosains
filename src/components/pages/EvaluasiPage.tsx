@@ -394,6 +394,7 @@ export const EvaluasiPage: React.FC<EvaluasiPageProps> = ({
         </button>
 
         <button
+          id="btn-evaluasi-ke-rangkuman"
           onClick={() => onNavigate('rangkuman')}
           className="w-full sm:w-auto px-6 py-3.5 bg-emerald-700 hover:bg-emerald-800 text-white font-bold rounded-xl shadow-md transition-all flex items-center justify-center gap-2 text-xs sm:text-sm"
         >
